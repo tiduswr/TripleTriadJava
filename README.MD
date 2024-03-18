@@ -11,62 +11,64 @@ Triple Triad é um jogo de cartas jogado em um tabuleiro 3x3, onde os jogadores 
 - Criação de cartas com valores numéricos nos lados.
 - Tabuleiro 3x3 para posicionar cartas.
 - Colocação de cartas no tabuleiro.
-- Determinação do vencedor com base na ocupação do tabuleiro.
 - Implementação básica de regras do jogo Triple Triad.
 
 ## Como Jogar
 
 1. Execute o jogo.
 2. Posicione suas cartas no tabuleiro.
-3. O jogo determinará automaticamente o vencedor com base nas regras do Triple Triad.
-4. Continue jogando até que um jogador vença.
+3. O jogo determinará automaticamente o vencedor com base nas regras do Triple Triad padrão.
+4. Continue jogando até que um jogador vença ou saia digitando 'q'.
 
 ## Executando o Jogo
 
-Para executar o jogo, você pode compilar e executar a classe principal `Main` no seu ambiente Java preferido.
+Para executar o jogo, você pode compilar e executar via maven.
 
 ```bash
-javac Main.java
-java Main
+cd SimpleTripleTriadJava
+mvn clean package
+java -jar target/card-game.jar
 ```
 
 ## GUI via Terminal
 
-```bash
-CARD GAME
+As cartas são coloridas de acordo com o Player.
 
-Jogada 1/9:
+```
+🃏🃏🃏🃏 CARD GAME 🃏🃏🃏🃏
+
+Jogada 3/9:
 0---+  1---+  2---+  
-|   |  |   |  |   |  
-|   |  |   |  |   |  
-|   |  |   |  |   |  
+| 6 |  |   |  |   |  
+|3 2|  |   |  |   |  
+| 2 |  |   |  |   |  
 +---+  +---+  +---+  
 3---+  4---+  5---+  
-|   |  |   |  |   |  
-|   |  |   |  |   |  
-|   |  |   |  |   |  
+|   |  | 4 |  |   |  
+|   |  |6 8|  |   |  
+|   |  | 5 |  |   |  
 +---+  +---+  +---+  
 6---+  7---+  8---+  
 |   |  |   |  |   |  
 |   |  |   |  |   |  
 |   |  |   |  |   |  
 +---+  +---+  +---+  
+        5:5        
 
 Player 1:
 
-0---+  1---+  2---+  3---+  4---+  
-| 4 |  | 6 |  | 6 |  | 7 |  | 1 |  
-|2 4|  |4 9|  |6 3|  |5 2|  |8 8|  
-| 7 |  | A |  | 1 |  | 3 |  | 4 |  
-+---+  +---+  +---+  +---+  +---+  
+0---+  1---+  2---+  3---+  
+| A |  | 7 |  | 6 |  | A |  
+|7 1|  |8 7|  |3 1|  |8 7|  
+| 7 |  | 2 |  | 4 |  | 2 |  
++---+  +---+  +---+  +---+  
 
-0. Death Claw
-1. Seifer
-2. Armadodo
-3. Abyss Worm
-4. Oilboyle
+0. Pandemona
+1. Ultima Weapon
+2. Glacial Eye
+3. Ward
 
-Faça sua jogada (carta, tabuleiro): 
+🃏 Faça sua jogada (carta, tabuleiro) ou insira 'q' para sair:
 ```
 
 ## Contribuição
