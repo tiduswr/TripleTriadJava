@@ -1,6 +1,5 @@
 package com.tiduswr.game.gui;
 
-import com.tiduswr.game.Card;
 import com.tiduswr.game.CardGame;
 import com.tiduswr.game.Player;
 
@@ -73,6 +72,31 @@ public class GUI {
         }
     }
 
+    public void drawPlacar(){
+        var p1 = cardGame.getPlayer1();
+        var p2 = cardGame.getPlayer2();
+
+        var prefixAndSufix = " ".repeat(8);
+        var placar = prefixAndSufix + 
+            formatStringByPlayerColor(p1,String.valueOf(p1.points().checkPoints())) 
+            + ":" + 
+            formatStringByPlayerColor(p2, String.valueOf(p2.points().checkPoints())) 
+            + prefixAndSufix;
+
+        System.out.println(placar);
+    }
+
+    public String formatStringByPlayerColor(Player p, String s){
+        switch (p.cardColor()) {
+            case BLUE:
+                return PrintUtils.formatBlue(s);
+            case GREEN:
+                return PrintUtils.formatGreen(s);
+            default:
+                return s;
+        }
+    }
+
     public void drawPlayerCards(Player p){
 
         var playerLabel = "\n" + p.name() + ":\n\n";
@@ -108,30 +132,32 @@ public class GUI {
         top += "\n";
         bottom += "\n"; 
         var body = bodyr1 + "\n" + bodyr2 + "\n" + bodyr3 + "\n";
+        var playerCard = top + body + bottom;
         switch (p.cardColor()) {
             case BLUE:
-                PrintUtils.printBlue(top + body + bottom);
+                PrintUtils.printBlue(playerCard);
                 break;
             case GREEN:
-                PrintUtils.printGreen(top + body + bottom);
+                PrintUtils.printGreen(playerCard);
                 break;
             default:
-                System.out.print(top + body + bottom);
+                System.out.print(playerCard);
                 break;
         }
         System.out.println();
 
         var cards = p.deck().cards();
         for(int i = 0; i < cards.size(); i++){
+            var cardName = i + ". " + cards.get(i).name();
             switch (p.cardColor()) {
                 case BLUE:
-                    PrintUtils.printBlue(i + ". " + cards.get(i).name());
+                    PrintUtils.printBlue(cardName);
                     break;
                 case GREEN:
-                    PrintUtils.printGreen(i + ". " + cards.get(i).name());
+                    PrintUtils.printGreen(cardName);
                     break;
                 default:
-                    System.out.print(i + ". " + cards.get(i).name());
+                    System.out.print(cardName);
                     break;
             }
 

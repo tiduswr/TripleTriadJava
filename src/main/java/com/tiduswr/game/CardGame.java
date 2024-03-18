@@ -15,24 +15,28 @@ import com.tiduswr.game.gui.GUI;
 
 public class CardGame {
     
-    public final Player P1, P2;
+    private final Player P1, P2;
     private final List<Card> CARDS;
     private final Board BOARD;
-    private final String CARDS_FILE = "Cards.csv";
+    private final String CARDS_FILE;
     private int jogadas;
     private final GUI gui;
     private Scanner scanner;
+    private final int STARTING_POINTS;
 
     public CardGame() throws IOException{
+        CARDS_FILE = "Cards.csv";
         scanner = new Scanner(System.in);
         jogadas = 0;
+        STARTING_POINTS = 5;
         gui = new GUI(this);
         CARDS = new ArrayList<>();
         BOARD = new Board();
-        BOARD.addBoardListener(new GameLogic());
+        P1 = new Player(new Deck(), "Player 1", CardColor.BLUE, new PlayerPoints(STARTING_POINTS));
+        P2 = new Player(new Deck(), "Player 2", CardColor.GREEN, new PlayerPoints(STARTING_POINTS));
+
+        BOARD.addBoardListener(new GameLogic(this));
         loadCards();
-        P1 = new Player(new Deck(), "Player 1", CardColor.BLUE);
-        P2 = new Player(new Deck(), "Player 2", CardColor.GREEN);
         generateRandomDecks();
     }
 
@@ -42,6 +46,14 @@ public class CardGame {
 
     public Board getBoard(){
         return BOARD;
+    }
+
+    public Player getPlayer1() {
+        return P1;
+    }
+
+    public Player getPlayer2() {
+        return P2;
     }
 
     public void start(){
@@ -58,6 +70,7 @@ public class CardGame {
 
         while(jogadas < 9){
             gui.printBoard();
+            gui.drawPlacar();
             gui.drawPlayerCards(player);
 
             if(lastInputWasError){
@@ -86,7 +99,7 @@ public class CardGame {
                     if(boardCard != null){
                         boardPlaceHasCard = true;
                     }else{
-                        var selectedCard = player.deck().retrieveCardByName(cardIndex);
+                        var selectedCard = player.deck().retrieveCardByIndex(cardIndex);
 
                         BOARD.setCardFromIndex(tabuleiro, selectedCard);
 
@@ -100,8 +113,9 @@ public class CardGame {
         }
         jogadas--;
 
-        var winner = BOARD.checkWinner();
+        var winner = checkWinner();
         gui.printBoard();
+        gui.drawPlacar();
         
         if(winner == null){
             System.out.println("\nO jogo acabou em empate!");
@@ -109,6 +123,16 @@ public class CardGame {
             System.out.println("\nO " + winner.name() + " ganhou a partida!");
         }
 
+    }
+
+    private Player checkWinner(){
+        if(P1.points().checkPoints() > P2.points().checkPoints()){
+            return P1;
+        }else if(P2.points().checkPoints() > P1.points().checkPoints()){
+            return P2;
+        }
+
+        return null;
     }
 
     private void generateRandomDecks(){

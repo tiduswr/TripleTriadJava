@@ -20,29 +20,6 @@ public class Board {
         return BOARD_SIZE;
     }
 
-    public Player checkWinner(){
-        HashMap<Player, Integer> map = new HashMap<>(); 
-
-        for(Card[] row : BOARD){
-            for(Card card : row){
-                var player = card.cardOwner().getPlayer();
-                map.put(player, map.getOrDefault(player, 0) + 1);
-            }
-        }
-
-        Player vencedor = null;
-        int maxCartas = 0;
-        for (Player jogador : map.keySet()) {
-            int numCartas = map.get(jogador);
-            if (numCartas > maxCartas) {
-                maxCartas = numCartas;
-                vencedor = jogador;
-            }
-        }
-
-        return maxCartas > 5 ? vencedor : null;
-    }
-
     public Card getCardFromIndex(int index){
         if(index >= 0 && index < BOARD_SIZE * BOARD_SIZE) {
             int row = index / BOARD_SIZE;

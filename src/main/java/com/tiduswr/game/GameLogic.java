@@ -2,7 +2,11 @@ package com.tiduswr.game;
 
 public class GameLogic implements BoardListeners{
 
-    public GameLogic(){}
+    private CardGame cardGame;
+
+    public GameLogic(CardGame cardGame){
+        this.cardGame = cardGame;
+    }
 
     @Override
     public void update(CardPlacedEvent cardPlacedEvent) {
@@ -24,7 +28,13 @@ public class GameLogic implements BoardListeners{
 
     private void checkAndSwap(Card placed, Card other, int atkPlaced, int atkOther){
         if(atkPlaced > atkOther){
-            other.cardOwner().setPlayer(placed.cardOwner().getPlayer());
+            var prevOwner = other.cardOwner().getPlayer();
+            var newOwner = placed.cardOwner().getPlayer();
+            
+            prevOwner.points().removePoint();
+            newOwner.points().addPoint();
+
+            other.cardOwner().setPlayer(newOwner);
         }
     }
     

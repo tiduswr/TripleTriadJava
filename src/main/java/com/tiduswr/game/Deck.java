@@ -33,7 +33,7 @@ public class Deck {
         return CARDS.get(index);
     }
 
-    public Card retrieveCardByName(int index){
+    public Card retrieveCardByIndex(int index){
         return CARDS.remove(index);
     }
 
