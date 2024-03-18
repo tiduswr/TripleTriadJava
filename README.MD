@@ -30,6 +30,45 @@ javac Main.java
 java Main
 ```
 
+## GUI via Terminal
+
+```bash
+CARD GAME
+
+Jogada 1/9:
+0---+  1---+  2---+  
+|   |  |   |  |   |  
+|   |  |   |  |   |  
+|   |  |   |  |   |  
++---+  +---+  +---+  
+3---+  4---+  5---+  
+|   |  |   |  |   |  
+|   |  |   |  |   |  
+|   |  |   |  |   |  
++---+  +---+  +---+  
+6---+  7---+  8---+  
+|   |  |   |  |   |  
+|   |  |   |  |   |  
+|   |  |   |  |   |  
++---+  +---+  +---+  
+
+Player 1:
+
+0---+  1---+  2---+  3---+  4---+  
+| 4 |  | 6 |  | 6 |  | 7 |  | 1 |  
+|2 4|  |4 9|  |6 3|  |5 2|  |8 8|  
+| 7 |  | A |  | 1 |  | 3 |  | 4 |  
++---+  +---+  +---+  +---+  +---+  
+
+0. Death Claw
+1. Seifer
+2. Armadodo
+3. Abyss Worm
+4. Oilboyle
+
+Faça sua jogada (carta, tabuleiro): 
+```
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você tiver sugestões de melhorias ou novas funcionalidades, sinta-se à vontade para abrir uma issue ou enviar um pull request.
