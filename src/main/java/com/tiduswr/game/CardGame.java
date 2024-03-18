@@ -35,7 +35,7 @@ public class CardGame {
         P1 = new Player(new Deck(), "Player 1", CardColor.BLUE, new PlayerPoints(STARTING_POINTS));
         P2 = new Player(new Deck(), "Player 2", CardColor.GREEN, new PlayerPoints(STARTING_POINTS));
 
-        BOARD.addBoardListener(new GameLogic(this));
+        BOARD.addBoardListener(new GameLogic());
         loadCards();
         generateRandomDecks();
     }

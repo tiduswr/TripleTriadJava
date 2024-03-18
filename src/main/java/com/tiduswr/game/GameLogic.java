@@ -2,12 +2,6 @@ package com.tiduswr.game;
 
 public class GameLogic implements BoardListeners{
 
-    private CardGame cardGame;
-
-    public GameLogic(CardGame cardGame){
-        this.cardGame = cardGame;
-    }
-
     @Override
     public void update(CardPlacedEvent cardPlacedEvent) {
         var placed = cardPlacedEvent.center();
