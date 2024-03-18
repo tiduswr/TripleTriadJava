@@ -92,8 +92,10 @@ public class CardGame {
                     boardPlaceHasCard = false;
             }
 
-            System.out.print("\n🃏 Faça sua jogada (carta, tabuleiro): ");
+            System.out.print("\n🃏 Faça sua jogada (carta, tabuleiro) ou insira 'q' para sair: ");
             String response = scanner.nextLine();
+
+            if(response.equalsIgnoreCase("q")) break;
 
             Pattern pattern = Pattern.compile("(\\d+),\\s*(\\d+)");
             Matcher matcher = pattern.matcher(response);
@@ -121,23 +123,26 @@ public class CardGame {
                 lastInputWasError = true;
             }
         }
-        jogadas--;
-
-        musicTheme.stop();
-        winTheme.play();
-
-        var winner = checkWinner();
-        gui.printBoard();
-        gui.drawPlacar();
         
-        if(winner == null){
-            System.out.println("\nO jogo acabou em empate 😐😐😐");
-        }else{
-            System.out.println("\nO " + winner.name() + " ganhou a partida 🎉🎉🎉");
-        }
+        if(jogadas == 9){
+            jogadas--;
 
-        Thread.sleep(10500);
-        winTheme.stop();
+            musicTheme.stop();
+            winTheme.play();
+
+            var winner = checkWinner();
+            gui.printBoard();
+            gui.drawPlacar();
+            
+            if(winner == null){
+                System.out.println("\nO jogo acabou em empate 😐😐😐");
+            }else{
+                System.out.println("\nO " + winner.name() + " ganhou a partida 🎉🎉🎉");
+            }
+
+            Thread.sleep(10500);
+            winTheme.stop();
+        }
     }
 
     private Player checkWinner(){
