@@ -1,5 +1,8 @@
 package com.tiduswr.game;
 
+import com.tiduswr.game.card.Card;
+import com.tiduswr.game.card.CardPlacedEvent;
+
 public class GameLogic implements BoardListeners{
 
     @Override

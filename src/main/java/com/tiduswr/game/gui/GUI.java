@@ -1,7 +1,7 @@
 package com.tiduswr.game.gui;
 
-import com.tiduswr.game.CardGame;
 import com.tiduswr.game.Player;
+import com.tiduswr.game.card.CardGame;
 
 public class GUI {
     
@@ -12,7 +12,7 @@ public class GUI {
     }
 
     public void printBoard(){
-        System.out.println("\nCARD GAME\n\nJogada %s/9:".replace("%s", String.valueOf(cardGame.getJogadaAtual())));
+        System.out.println("\n🃏🃏🃏🃏 CARD GAME 🃏🃏🃏🃏\n\nJogada %s/9:".replace("%s", String.valueOf(cardGame.getJogadaAtual())));
 
         int placeCardIndex = 0;
         for(int i = 0; i < cardGame.getBoard().getBoardSize(); i++){

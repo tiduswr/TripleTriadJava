@@ -3,6 +3,9 @@ package com.tiduswr.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tiduswr.game.card.Card;
+import com.tiduswr.game.card.CardPlacedEvent;
+
 public class Board {
     
     private final Card[][] BOARD;
