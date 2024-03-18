@@ -52,6 +52,8 @@ public class CardGame {
         playerTurn.add(P1);
         playerTurn.add(P2);
 
+        Collections.shuffle(playerTurn);
+
         Player player = playerTurn.removeFirst();
 
         while(jogadas < 9){
