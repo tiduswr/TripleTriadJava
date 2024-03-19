@@ -1,7 +1,7 @@
 package com.tiduswr.game.gui;
 
-import com.tiduswr.game.Player;
-import com.tiduswr.game.card.CardGame;
+import com.tiduswr.game.CardGame;
+import com.tiduswr.game.player.Player;
 
 public class GUI {
     

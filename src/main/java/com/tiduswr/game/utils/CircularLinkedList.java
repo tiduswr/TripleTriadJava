@@ -1,4 +1,4 @@
-package com.tiduswr.game;
+package com.tiduswr.game.utils;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;

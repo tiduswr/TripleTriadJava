@@ -1,6 +1,6 @@
 package com.tiduswr.game.card;
 
-import com.tiduswr.game.Player;
+import com.tiduswr.game.player.Player;
 
 public class CardOwner {
     

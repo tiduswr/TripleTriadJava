@@ -1,4 +1,4 @@
-package com.tiduswr.game;
+package com.tiduswr.game.board;
 
 import java.util.ArrayList;
 import java.util.List;

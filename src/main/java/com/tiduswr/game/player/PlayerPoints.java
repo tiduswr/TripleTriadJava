@@ -1,4 +1,4 @@
-package com.tiduswr.game;
+package com.tiduswr.game.player;
 
 public class PlayerPoints {
 

@@ -1,4 +1,4 @@
-package com.tiduswr.game;
+package com.tiduswr.game.board;
 
 import com.tiduswr.game.card.CardPlacedEvent;
 

@@ -1,5 +1,6 @@
 package com.tiduswr.game;
 
+import com.tiduswr.game.board.BoardListeners;
 import com.tiduswr.game.card.Card;
 import com.tiduswr.game.card.CardPlacedEvent;
 

@@ -1,4 +1,4 @@
-package com.tiduswr.game.card;
+package com.tiduswr.game;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.tiduswr.game.Board;
-import com.tiduswr.game.CircularLinkedList;
-import com.tiduswr.game.GameLogic;
-import com.tiduswr.game.Player;
-import com.tiduswr.game.PlayerPoints;
-import com.tiduswr.game.SoundPlayer;
+import com.tiduswr.game.board.Board;
+import com.tiduswr.game.card.Card;
+import com.tiduswr.game.card.CardOwner;
+import com.tiduswr.game.card.Deck;
 import com.tiduswr.game.gui.CardColor;
 import com.tiduswr.game.gui.GUI;
+import com.tiduswr.game.player.Player;
+import com.tiduswr.game.player.PlayerPoints;
+import com.tiduswr.game.utils.CircularLinkedList;
+import com.tiduswr.game.utils.SoundPlayer;
 
 public class CardGame {
     

@@ -1,4 +1,4 @@
-package com.tiduswr.game;
+package com.tiduswr.game.utils;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
