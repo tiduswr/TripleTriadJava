@@ -2,6 +2,7 @@ package com.tiduswr.game.gui;
 
 import com.tiduswr.game.CardGame;
 import com.tiduswr.game.player.Player;
+import com.tiduswr.game.utils.PrintUtils;
 
 public class GUI {
     

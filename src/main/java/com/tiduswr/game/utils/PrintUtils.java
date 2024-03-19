@@ -1,4 +1,4 @@
-package com.tiduswr.game.gui;
+package com.tiduswr.game.utils;
 
 public class PrintUtils {
     private static final String ANSI_GREEN_BACKGROUND = "\u001B[32m";
