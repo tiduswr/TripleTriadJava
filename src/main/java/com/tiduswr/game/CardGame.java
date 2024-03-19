@@ -1,18 +1,13 @@
 package com.tiduswr.game;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.tiduswr.game.board.Board;
-import com.tiduswr.game.card.Card;
-import com.tiduswr.game.card.CardOwner;
+import com.tiduswr.game.card.Cards;
 import com.tiduswr.game.card.Deck;
 import com.tiduswr.game.gui.CardColor;
 import com.tiduswr.game.gui.GUI;
@@ -24,31 +19,29 @@ import com.tiduswr.game.utils.SoundPlayer;
 public class CardGame {
     
     private final Player P1, P2;
-    private final List<Card> CARDS;
     private final Board BOARD;
-    private final String CARDS_FILE;
-    private int jogadas;
+    private final Cards CARDS;    
     private final GUI gui;
     private final Scanner scanner;
     private final int STARTING_POINTS;
     private final SoundPlayer musicTheme;
     private final SoundPlayer winTheme;
 
+    private int jogadas;
+
     public CardGame() throws IOException{
-        CARDS_FILE = "Cards.csv";
-        scanner = new Scanner(System.in);
-        jogadas = 0;
+        scanner = new Scanner(System.in);        
+        CARDS = new Cards();
         STARTING_POINTS = 5;
         gui = new GUI(this);
-        CARDS = new ArrayList<>();
         BOARD = new Board();
         P1 = new Player(new Deck(), "Player 1", CardColor.BLUE, new PlayerPoints(STARTING_POINTS));
         P2 = new Player(new Deck(), "Player 2", CardColor.GREEN, new PlayerPoints(STARTING_POINTS));
         musicTheme = new SoundPlayer("theme.wav");
         winTheme = new SoundPlayer("win.wav");
+        jogadas = 0;
 
         BOARD.addBoardListener(new GameLogic());
-        loadCards();
         generateRandomDecks();
     }
 
@@ -172,32 +165,11 @@ public class CardGame {
 
         for(var p : players){
             for(int i = 0; i < 5; i++){
-                var card = CARDS.remove(0);
+                var card = CARDS.getCards().remove(0);
                 card.cardOwner().setPlayer(p);
                 p.deck().addCard(card);
             }
         }
-    }
-
-    private void loadCards() throws IOException{
-        var is = this.getClass().getClassLoader().getResourceAsStream(CARDS_FILE);
-        try(BufferedReader buffer = new BufferedReader(new InputStreamReader(is))){
-            String line;
-            while((line = buffer.readLine()) != null){
-                String[] row = line.split(",");
-
-                Card card = new Card(row[0], 
-                    Integer.parseInt(row[1]), 
-                    Integer.parseInt(row[2]), 
-                    Integer.parseInt(row[4]), 
-                    Integer.parseInt(row[3]),
-                    new CardOwner(null)
-                );
-                CARDS.add(card);
-            }
-        }
-
-        Collections.shuffle(CARDS);
     }
 
 }
