@@ -11,8 +11,8 @@ import com.tiduswr.game.gui.CardColor;
 import com.tiduswr.game.gui.GUI;
 import com.tiduswr.game.player.Player;
 import com.tiduswr.game.player.PlayerPoints;
+import com.tiduswr.game.player.PlayerTurnSwitch;
 import com.tiduswr.game.player.PlayerWithRandomDeck;
-import com.tiduswr.game.utils.PlayerTurnSwitch;
 import com.tiduswr.game.utils.SoundPlayer;
 
 public class CardGame {
@@ -134,7 +134,7 @@ public class CardGame {
     }
 
     private void waitAndStopTheme() throws InterruptedException{
-        Thread.sleep(10500);
+        Thread.sleep(5000);
         musicTheme.stop();
     }
 

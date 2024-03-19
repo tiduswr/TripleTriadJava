@@ -1,11 +1,9 @@
-package com.tiduswr.game.utils;
+package com.tiduswr.game.player;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import com.tiduswr.game.player.Player;
 
 public class PlayerTurnSwitch {
 
