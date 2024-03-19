@@ -29,10 +29,10 @@ public class CardGame {
     private final String CARDS_FILE;
     private int jogadas;
     private final GUI gui;
-    private Scanner scanner;
+    private final Scanner scanner;
     private final int STARTING_POINTS;
-    private SoundPlayer musicTheme = new SoundPlayer("theme.wav");
-    private SoundPlayer winTheme = new SoundPlayer("win.wav");
+    private final SoundPlayer musicTheme;
+    private final SoundPlayer winTheme;
 
     public CardGame() throws IOException{
         CARDS_FILE = "Cards.csv";
@@ -44,6 +44,8 @@ public class CardGame {
         BOARD = new Board();
         P1 = new Player(new Deck(), "Player 1", CardColor.BLUE, new PlayerPoints(STARTING_POINTS));
         P2 = new Player(new Deck(), "Player 2", CardColor.GREEN, new PlayerPoints(STARTING_POINTS));
+        musicTheme = new SoundPlayer("theme.wav");
+        winTheme = new SoundPlayer("win.wav");
 
         BOARD.addBoardListener(new GameLogic());
         loadCards();
@@ -81,7 +83,7 @@ public class CardGame {
 
         while(jogadas < 9){
             musicTheme.play();
-            gui.printBoard();
+            gui.drawBoard();
             gui.drawPlacar();
             gui.drawPlayerCards(player);
 
@@ -127,24 +129,32 @@ public class CardGame {
         }
         
         if(jogadas == 9){
-            jogadas--;
-
-            musicTheme.stop();
-            winTheme.play();
+            jogadas--;            
 
             var winner = checkWinner();
-            gui.printBoard();
+            gui.drawBoard();
             gui.drawPlacar();
             
             if(winner == null){
                 System.out.println("\nO jogo acabou em empate 😐😐😐");
+                waitAndStopTheme();
             }else{
-                System.out.println("\nO " + winner.name() + " ganhou a partida 🎉🎉🎉");
+                System.out.println("\nO " + gui.formatStringByPlayerColor(player, winner.name()) + " ganhou a partida 🎉🎉🎉");
+                playAndStopWinTheme();
             }
-
-            Thread.sleep(10500);
-            winTheme.stop();
         }
+    }
+
+    private void waitAndStopTheme() throws InterruptedException{
+        Thread.sleep(10500);
+        musicTheme.stop();
+    }
+
+    private void playAndStopWinTheme() throws InterruptedException{
+        musicTheme.stop();
+        winTheme.play();
+        Thread.sleep(10500);
+        winTheme.stop();
     }
 
     private Player checkWinner(){

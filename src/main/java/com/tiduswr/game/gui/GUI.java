@@ -12,7 +12,7 @@ public class GUI {
         this.cardGame = cardGame;
     }
 
-    public void printBoard(){
+    public void drawBoard(){
         System.out.println("\n🃏🃏🃏🃏 CARD GAME 🃏🃏🃏🃏\n\nJogada %s/9:".replace("%s", String.valueOf(cardGame.getJogadaAtual())));
 
         int placeCardIndex = 0;
