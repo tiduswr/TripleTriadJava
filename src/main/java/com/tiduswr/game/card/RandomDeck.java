@@ -16,8 +16,7 @@ public class RandomDeck extends Deck{
 
         for(int i = 0; i < 5; i++){
             final int randomIndex = r.nextInt(cardsSize);
-            final var randomCard = gameCards.getCards().get(randomIndex);
-            randomCard.cardOwner().setPlayer(player);
+            final var randomCard = gameCards.getCards().get(randomIndex).copy(player);
             addCard(randomCard);
         }
     }

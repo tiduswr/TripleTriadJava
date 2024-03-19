@@ -1,7 +1,6 @@
 package com.tiduswr.game;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +12,7 @@ import com.tiduswr.game.gui.GUI;
 import com.tiduswr.game.player.Player;
 import com.tiduswr.game.player.PlayerPoints;
 import com.tiduswr.game.player.PlayerWithRandomDeck;
-import com.tiduswr.game.utils.CircularLinkedList;
+import com.tiduswr.game.utils.PlayerTurnSwitch;
 import com.tiduswr.game.utils.SoundPlayer;
 
 public class CardGame {
@@ -26,11 +25,13 @@ public class CardGame {
     private final int STARTING_POINTS;
     private final SoundPlayer musicTheme;
     private final SoundPlayer winTheme;
+    private final String INPUT_MASK;
 
     private int jogadas;
 
     public CardGame() throws IOException{
-        scanner = new Scanner(System.in);        
+        scanner = new Scanner(System.in);
+        INPUT_MASK = "(\\d+),\\s*(\\d+)";        
         CARDS = new GameCards();
         STARTING_POINTS = 5;
         jogadas = 0;
@@ -61,16 +62,11 @@ public class CardGame {
     }
 
     public void start() throws InterruptedException{
-        CircularLinkedList<Player> playerTurn = new CircularLinkedList<>();
+        PlayerTurnSwitch playerTurn = new PlayerTurnSwitch(P1, P2);
         boolean lastInputWasError = false;
         boolean boardPlaceHasCard = false;
 
-        playerTurn.add(P1);
-        playerTurn.add(P2);
-
-        Collections.shuffle(playerTurn);
-
-        Player player = playerTurn.removeFirst();
+        Player player = playerTurn.next();
         musicTheme.loop();
 
         while(jogadas < 9){
@@ -93,7 +89,7 @@ public class CardGame {
 
             if(response.equalsIgnoreCase("q")) break;
 
-            Pattern pattern = Pattern.compile("(\\d+),\\s*(\\d+)");
+            Pattern pattern = Pattern.compile(INPUT_MASK);
             Matcher matcher = pattern.matcher(response);
 
             if (matcher.find()) {
@@ -112,7 +108,7 @@ public class CardGame {
                         BOARD.setCardFromIndex(tabuleiro, selectedCard);
 
                         jogadas++;
-                        player = playerTurn.removeFirst();
+                        player = playerTurn.next();
                     }
                 }
             } else {
