@@ -29,8 +29,8 @@ public class GameLogic implements BoardListeners{
             var prevOwner = other.cardOwner().getPlayer();
             var newOwner = placed.cardOwner().getPlayer();
             
-            prevOwner.points().removePoint();
-            newOwner.points().addPoint();
+            prevOwner.getPoints().removePoint();
+            newOwner.getPoints().addPoint();
 
             other.cardOwner().setPlayer(newOwner);
         }

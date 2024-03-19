@@ -7,12 +7,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.tiduswr.game.board.Board;
-import com.tiduswr.game.card.Cards;
-import com.tiduswr.game.card.Deck;
+import com.tiduswr.game.card.GameCards;
 import com.tiduswr.game.gui.CardColor;
 import com.tiduswr.game.gui.GUI;
 import com.tiduswr.game.player.Player;
 import com.tiduswr.game.player.PlayerPoints;
+import com.tiduswr.game.player.PlayerWithRandomDeck;
 import com.tiduswr.game.utils.CircularLinkedList;
 import com.tiduswr.game.utils.SoundPlayer;
 
@@ -20,7 +20,7 @@ public class CardGame {
     
     private final Player P1, P2;
     private final Board BOARD;
-    private final Cards CARDS;    
+    private final GameCards CARDS;    
     private final GUI gui;
     private final Scanner scanner;
     private final int STARTING_POINTS;
@@ -31,18 +31,17 @@ public class CardGame {
 
     public CardGame() throws IOException{
         scanner = new Scanner(System.in);        
-        CARDS = new Cards();
+        CARDS = new GameCards();
         STARTING_POINTS = 5;
-        gui = new GUI(this);
+        jogadas = 0;
+        P1 = new PlayerWithRandomDeck(CARDS, "Player 1", CardColor.BLUE, new PlayerPoints(STARTING_POINTS));
+        P2 = new PlayerWithRandomDeck(CARDS, "Player 2", CardColor.GREEN, new PlayerPoints(STARTING_POINTS));
         BOARD = new Board();
-        P1 = new Player(new Deck(), "Player 1", CardColor.BLUE, new PlayerPoints(STARTING_POINTS));
-        P2 = new Player(new Deck(), "Player 2", CardColor.GREEN, new PlayerPoints(STARTING_POINTS));
         musicTheme = new SoundPlayer("theme.wav");
         winTheme = new SoundPlayer("win.wav");
-        jogadas = 0;
+        gui = new GUI(this);
 
         BOARD.addBoardListener(new GameLogic());
-        generateRandomDecks();
     }
 
     public int getJogadaAtual(){
@@ -101,14 +100,14 @@ public class CardGame {
                 int cardIndex = Integer.parseInt(matcher.group(1));
                 int tabuleiro = Integer.parseInt(matcher.group(2));
                 
-                if(tabuleiro >= (BOARD.getBoardSize() * BOARD.getBoardSize()) || cardIndex >= player.deck().handSize()){
+                if(tabuleiro >= (BOARD.getBoardSize() * BOARD.getBoardSize()) || cardIndex >= player.getDeck().handSize()){
                     lastInputWasError = true;
                 }else{
                     var boardCard = BOARD.getCardFromIndex(tabuleiro);
                     if(boardCard != null){
                         boardPlaceHasCard = true;
                     }else{
-                        var selectedCard = player.deck().retrieveCardByIndex(cardIndex);
+                        var selectedCard = player.getDeck().retrieveCardByIndex(cardIndex);
 
                         BOARD.setCardFromIndex(tabuleiro, selectedCard);
 
@@ -132,7 +131,7 @@ public class CardGame {
                 System.out.println("\nO jogo acabou em empate 😐😐😐");
                 waitAndStopTheme();
             }else{
-                System.out.println("\nO " + gui.formatStringByPlayerColor(player, winner.name()) + " ganhou a partida 🎉🎉🎉");
+                System.out.println("\nO " + gui.formatStringByPlayerColor(winner, winner.getName()) + " ganhou a partida 🎉🎉🎉");
                 playAndStopWinTheme();
             }
         }
@@ -151,25 +150,13 @@ public class CardGame {
     }
 
     private Player checkWinner(){
-        if(P1.points().checkPoints() > P2.points().checkPoints()){
+        if(P1.getPoints().checkPoints() > P2.getPoints().checkPoints()){
             return P1;
-        }else if(P2.points().checkPoints() > P1.points().checkPoints()){
+        }else if(P2.getPoints().checkPoints() > P1.getPoints().checkPoints()){
             return P2;
         }
 
         return null;
-    }
-
-    private void generateRandomDecks(){
-        Player[] players = {P1, P2};
-
-        for(var p : players){
-            for(int i = 0; i < 5; i++){
-                var card = CARDS.getCards().remove(0);
-                card.cardOwner().setPlayer(p);
-                p.deck().addCard(card);
-            }
-        }
     }
 
 }

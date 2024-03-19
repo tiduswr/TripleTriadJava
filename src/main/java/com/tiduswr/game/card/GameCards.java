@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Cards {
+public class GameCards {
     private final String CARDS_FILE;
     private final List<Card> CARDS;
 
-    public Cards() throws IOException{
+    public GameCards() throws IOException{
         CARDS_FILE = "Cards.csv";
         CARDS = new ArrayList<>();
         loadCards();

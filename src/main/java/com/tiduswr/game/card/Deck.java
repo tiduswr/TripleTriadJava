@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Deck {
     
-    private final List<Card> CARDS;
-    private final short MAX_SIZE = 5;
+    protected final List<Card> CARDS;
+    protected final short MAX_SIZE = 5;
 
     public Deck(){
         CARDS = new ArrayList<>();

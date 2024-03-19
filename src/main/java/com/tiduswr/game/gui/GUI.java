@@ -34,7 +34,7 @@ public class GUI {
                     bottom += "+---+  ";
                 }else{
 
-                    switch (card.cardOwner().getPlayer().cardColor()) {
+                    switch (card.cardOwner().getPlayer().getCardColor()) {
                         case BLUE:
                             top    += PrintUtils.formatBlue(placeCardIndex + "---+  ");
                             bodyr1 += PrintUtils.formatBlue("| %t |  ".replace("%t", convertValue(card.attackTop())));
@@ -79,16 +79,16 @@ public class GUI {
 
         var prefixAndSufix = " ".repeat(8);
         var placar = prefixAndSufix + 
-            formatStringByPlayerColor(p1,String.valueOf(p1.points().checkPoints())) 
+            formatStringByPlayerColor(p1,String.valueOf(p1.getPoints().checkPoints())) 
             + ":" + 
-            formatStringByPlayerColor(p2, String.valueOf(p2.points().checkPoints())) 
+            formatStringByPlayerColor(p2, String.valueOf(p2.getPoints().checkPoints())) 
             + prefixAndSufix;
 
         System.out.println(placar);
     }
 
     public String formatStringByPlayerColor(Player p, String s){
-        switch (p.cardColor()) {
+        switch (p.getCardColor()) {
             case BLUE:
                 return PrintUtils.formatBlue(s);
             case GREEN:
@@ -100,8 +100,8 @@ public class GUI {
 
     public void drawPlayerCards(Player p){
 
-        var playerLabel = "\n" + p.name() + ":\n\n";
-        switch (p.cardColor()) {
+        var playerLabel = "\n" + p.getName() + ":\n\n";
+        switch (p.getCardColor()) {
             case BLUE:
                 PrintUtils.printBlue(playerLabel);
                 break;
@@ -119,8 +119,8 @@ public class GUI {
         String bodyr3 = "";
         String bottom = "";
 
-        for(int i = 0; i < p.deck().handSize(); i++){
-            var card = p.deck().checkCardByIndex(i);
+        for(int i = 0; i < p.getDeck().handSize(); i++){
+            var card = p.getDeck().checkCardByIndex(i);
 
             top    += i + "---+  ";
             bodyr1 += "| %t |  ".replace("%t", convertValue(card.attackTop()));
@@ -134,7 +134,7 @@ public class GUI {
         bottom += "\n"; 
         var body = bodyr1 + "\n" + bodyr2 + "\n" + bodyr3 + "\n";
         var playerCard = top + body + bottom;
-        switch (p.cardColor()) {
+        switch (p.getCardColor()) {
             case BLUE:
                 PrintUtils.printBlue(playerCard);
                 break;
@@ -147,10 +147,10 @@ public class GUI {
         }
         System.out.println();
 
-        var cards = p.deck().cards();
+        var cards = p.getDeck().cards();
         for(int i = 0; i < cards.size(); i++){
             var cardName = i + ". " + cards.get(i).name();
-            switch (p.cardColor()) {
+            switch (p.getCardColor()) {
                 case BLUE:
                     PrintUtils.printBlue(cardName);
                     break;
